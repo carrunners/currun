@@ -1,61 +1,84 @@
+import os
 from flask import Flask, render_template, request
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'bc83989cdfdd894859fkdlfd83i489ffjdj99'
+global current_user
+current_user = ""
 
 @app.route('/')
 def index():
+    global current_user
+
+    if current_user == "":
+        print("first")
+        current_user = request.environ['REMOTE_ADDR']
     return render_template('joystick.html')
 
 
 @app.route('/forward_start')
 def forward_start():
-    print("forward start")
+    global current_user
+    if current_user == request.environ['REMOTE_ADDR']:
+        print("forward start")
     return "nothing"
 
 
 @app.route('/forward_stop')
 def forward_stop():
-    print("forward stop")
+    global current_user
+    if current_user == request.environ['REMOTE_ADDR']:
+        print("forward stop")
     return "nothing"
 
 
 @app.route('/left_start')
-def left_start(): 
-    print ("left start")
+def left_start():
+    global current_user
+    if current_user == request.environ['REMOTE_ADDR']:   
+        print ("left start")
     return "nothing"
 
 
 @app.route('/left_stop')
 def left_stop():
-    print ("left stop")
+    global current_user
+    if current_user == request.environ['REMOTE_ADDR']:
+        print ("left stop")
     return "nothing"
 
 
 @app.route('/right_start')
 def right_start():
-    print ("right start")
+    global current_user
+    if current_user == request.environ['REMOTE_ADDR']:
+        print ("right start")
     return "nothing"
 
 
 @app.route('/right_stop')
 def right_stop():
-    print ("right stop")
+    global current_user
+    if current_user == request.environ['REMOTE_ADDR']:
+        print ("right stop")
     return "nothing"
 
 
 @app.route('/backward_start')
 def backward_start():
-    print ("backward start")  
+    global current_user
+    if current_user == request.environ['REMOTE_ADDR']:
+        print ("backward start")
     return "nothing"
 
 
 @app.route('/backward_stop')
 def backward_stop():
-    print ("backward_stop")
+    global current_user
+    if current_user == request.environ['REMOTE_ADDR']:
+        print ("backward stop")
     return "nothing"
 
-@app.route('/exit')
-def exit():
-    print("exit")
-    return "nothing"
 
 
 if __name__ == "__main__":
